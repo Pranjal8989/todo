@@ -1,0 +1,9 @@
+{% extends 'header.html' %}
+{% block content %}
+    <h2>Task Category</h2>
+    <ul>
+    {% for elements in category %}
+        <li><strong><a href="{% url 'viewTask' elements.id %}" >{{ elements }}</a></strong> - {{ elements.description }} (<a href="{% url 'updateCategory' elements.id %}">edit</a>)</li>
+    {% endfor %}
+    </ul>
+   {% endblock %}

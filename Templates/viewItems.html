@@ -1,0 +1,63 @@
+{% extends 'header.html' %}
+{% block content %}
+    <h2 align="center">Task Items</h2>
+    <h4 style="color: green">Completed Task</h4>
+    <ul>
+    {% for elements in completed %}
+        <li><strong>{{ elements }}</strong> - {{ elements.description }}<a href="{%  url 'editTask' id  %}"> <h5 align="element right">Edit</h5></a></li>
+
+
+    {% endfor %}
+    </ul>
+    <h4 style="color: red">Pending Task</h4>
+    <ul>
+    {% for elements in pending %}
+
+        <li><strong> >{{ elements }}</strong> - {{ elements.description }} (<a href="{% url 'updateTask' elements.id %}"> Update Status </a>)</li>
+    {% endfor %}
+    </ul>
+
+    <hr>
+ <a href="{% url 'viewTask' id %}" class="btn btn-success" data-toggle="modal"> <span>  <h3 align="Right">Add Task</h3></span></a>
+ <form action="{% url 'viewTask' id %}" method="post">
+
+     <h2 align="center">Add Task</h2>
+    {% csrf_token %}
+
+    <table>
+        <style>
+            table{
+                  width: 50%;
+                  margin: 30px auto;
+                  border-collapse: collapse;
+                  text-align: left;
+                  }
+            form {
+                  width: 60%;
+                  margin: 50px auto;
+                  text-align: left;
+                  padding: 20px;
+                  border: 1px solid #bbbbbb;
+                  border-radius: 5px;
+                  background-color:lightyellow;
+                  box-shadow: 0px 0px 10px rgba(0,0,0, 0.2);
+                  }
+        </style>
+        {% for form_item in form %}
+            <tr>
+            <td>
+                {{ form_item.label }}
+            </td>
+            <td>
+                {{ form_item }}
+            </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+        <tr><input type="submit" value="Add Category"></tr>
+
+    </form>
+
+{% endblock %}
